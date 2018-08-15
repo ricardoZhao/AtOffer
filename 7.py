@@ -22,10 +22,10 @@ class Solution(object):
             return None
 
         node = Node(pre[0])
-        node_index = mid.index(node.data) + 1
+        node_index = mid.index(node)
 
-        node.left = self.rebuild_binary_tree(pre[1:node_index], mid[:node_index+1])
-        node.right = self.rebuild_binary_tree(pre[node_index:], mid[node_index:])
+        node.left = self.rebuild_binary_tree(pre[1:1+node_index], mid[:node_index])
+        node.right = self.rebuild_binary_tree(pre[node_index+1:], mid[node_index+1:])
 
         return node
 
