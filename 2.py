@@ -11,12 +11,13 @@ import threading
 class Singleton(object):
     instance = None
     lock = threading.Lock()
-    
+
     def __new__(cls, *args, **kwargs):
         if not cls.instance:
             with cls.lock:
                 if not cls.instance:
-                    cls.instance = super(Singleton, cls).__new__(cls, *args, **kwargs)
+                    cls.instance = super(Singleton, cls).\
+                            __new__(cls, *args, **kwargs)
         return cls.instance
 
 
@@ -36,7 +37,7 @@ def singleton(cls):
 
 @singleton
 class Test(object):
-    
+
     def __init__(self, *args, **kwargs):
         pass
 
