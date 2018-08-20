@@ -74,4 +74,3 @@ if __name__ == '__main__':
     data2 = [1, 2, 3, 4, 5, 6, 5]
     result = solution.find_dup_number_v2(data2)
     print(result)
-
