@@ -22,6 +22,41 @@ class Solution(object):
         if not matrix:
             return False
 
+        visited = [False] * rows * cols
+
+        for row in range(rows):
+            for col in range(cols):
+                if self.find_path(matrix, rows, cols, path, row, col, visited):
+                    return True
+
+        return False
+
+    def find_path(self, matrix, rows, cols, path, row, col, visited):
+        if not path:
+            return True
+
+        index = row * cols + col
+
+        if row < 0 or row >= rows or col < 0 or col >= cols or matrix[index] != path[0] or visited[index]:
+            return False
+
+        visited[index] = True
+
+        if (self.find_path(matrix, rows, cols, path[1:], row, col+1, visited) or 
+            self.find_path(matrix, rows, cols, path[1:], row, col-1, visited) or 
+            self.find_path(matrix, rows, cols, path[1:], row+1, col, visited) or 
+            self.find_path(matrix, rows, cols, path[1:], row-1, col, visited)):
+            return True
+
+        visited[index] = False   
+        return False
+
+
+    """
+    def has_path(self, matrix, rows, cols, path):
+        if not matrix:
+            return False
+
         for i in range(rows):
             for j in range(cols):
                 if matrix[i*cols+j] == path[0]:
@@ -43,10 +78,11 @@ class Solution(object):
         elif i-1 >= 0 and matrix[(i-1)*cols+j] == path[0]:
             return self.find_path(matrix, rows, cols, path[1:], i-1, j)
         return False
+    """
 
 
 if __name__ == '__main__':
     solution = Solution()
     matrix = 'abtgcfcsjdeh'
-    result = solution.has_path(matrix, 3, 4, 'fced')
+    result = solution.has_path(matrix, 3, 4, 'tgsh')
     print(result)
