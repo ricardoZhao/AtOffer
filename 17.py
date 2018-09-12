@@ -34,7 +34,8 @@ class Solution(object):
             if elem != '0':
                 start_index = index
                 break
-        print(''.join(number[start_index:]))
+        if number[start_index] != '0':
+            print(''.join(number[start_index:]))
 
 
 if __name__ == '__main__':
